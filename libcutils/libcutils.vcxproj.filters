@@ -15,10 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="rbtree.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="main.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="rbtree.cc">
+    <ClCompile Include="common.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
