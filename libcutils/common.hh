@@ -11,6 +11,10 @@
 #define LIBCUTILS_API __declspec(dllimport)
 #endif
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /// <summary>
 /// 
 /// </summary>
@@ -36,5 +40,9 @@ extern "C" LIBCUTILS_API void print_array(
     size_t p_start,
     size_t p_numOfElements,
     void (*printfun)(const void*));
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // !COMMON_H
