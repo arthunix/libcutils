@@ -24,12 +24,24 @@
     <ClCompile Include="common.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="list.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stack.hh">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="rbtree.hh">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="common.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="list.cc">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="list.hh">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
