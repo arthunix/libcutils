@@ -1,4 +1,4 @@
-#include "common.hh"
+#include "common.h"
 
 void* safe_malloc(size_t n, unsigned long line)
 {

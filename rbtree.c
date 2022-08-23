@@ -1,5 +1,5 @@
-#include "rbtree.hh"
-#include "common.hh"
+#include "rbtree.h"
+#include "common.h"
 
 #include <stdlib.h>
 
@@ -322,7 +322,7 @@ void _rbtree_print_preorder(const rbtree* tree, const rbnode* x) {
 /// 
 /// </summary>
 /// <param name="tree"></param>
-void rbtree_print_preorder(rbtree* tree) {
+void rbtree_print_preorder(const rbtree* tree) {
     _rbtree_print_preorder(tree, tree->root->left);
 }
 

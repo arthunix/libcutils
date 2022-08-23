@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "list.hh"
-#include "rbtree.hh"
-#include "common.hh"
+#include "list.h"
+#include "rbtree.h"
+#include "common.h"
+#include "stack.h"
 
 void int_destroy(void* a);
 int int_cmp(const void* a, const void* b);

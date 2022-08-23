@@ -21,7 +21,7 @@ extern "C" {
 /// <param name="n"></param>
 /// <param name="line"></param>
 /// <returns></returns>
-extern "C" LIBCUTILS_API void* safe_malloc(size_t n, unsigned long line);
+LIBCUTILS_API void* safe_malloc(size_t n, unsigned long line);
 
 #define malloc_v(n) safe_malloc(n, __LINE__)
 
@@ -34,7 +34,7 @@ extern "C" LIBCUTILS_API void* safe_malloc(size_t n, unsigned long line);
 /// <param name="p_start">: The index of the element you want to start printing</param>
 /// <param name="p_numOfElements">: The Size of The Array, the number of elements to print</param>
 /// <param name="printFunction">: The function will be used to print a singe data type element</param>
-extern "C" LIBCUTILS_API void print_array(
+LIBCUTILS_API void print_array(
     void* data,
     size_t sizeOfTheType,
     size_t p_start,

@@ -19,22 +19,22 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="common.cc" />
-    <ClCompile Include="main.cc" />
-    <ClCompile Include="rbtree.cc" />
-    <ClCompile Include="list.cc" />
-    <ClCompile Include="stack.hh" />
+    <ClCompile Include="common.c" />
+    <ClCompile Include="main.c" />
+    <ClCompile Include="rbtree.c" />
+    <ClCompile Include="stack.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="common.hh" />
-    <ClInclude Include="list.cc">
+    <ClInclude Include="common.h" />
+    <ClInclude Include="list.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="list.hh" />
-    <ClInclude Include="rbtree.hh" />
+    <ClInclude Include="list.h" />
+    <ClInclude Include="rbtree.h" />
+    <ClInclude Include="stack.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

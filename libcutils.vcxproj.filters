@@ -15,33 +15,33 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="rbtree.cc">
+    <ClCompile Include="rbtree.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.cc">
+    <ClCompile Include="main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="common.cc">
+    <ClCompile Include="common.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="list.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="stack.hh">
+    <ClCompile Include="stack.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="rbtree.hh">
+    <ClInclude Include="rbtree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="common.hh">
+    <ClInclude Include="common.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="list.cc">
+    <ClInclude Include="list.c">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="list.hh">
+    <ClInclude Include="list.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
