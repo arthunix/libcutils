@@ -1,5 +1,5 @@
-#include "list.hh"
-#include "common.hh"
+#include "list.h"
+#include "common.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -321,5 +321,10 @@ void list_print(
     curr = list_input->tail;
     (list_input->printdata)(curr->data);
     fprintf(stdout, ">");
+    
+#if defined(_WIN32) || defined(_WIN64) || defined(WIN32) || defined(WIN64)
     _flushall();
+#elif defined(__linux__) || defined(UNIX) || defined(__unix__) || defined(LINUX)
+    fflush(NULL);
+#endif
 }
