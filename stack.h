@@ -2,11 +2,23 @@
 #ifndef STACK_H
 #define STACK_H
 
-#ifdef LIBCUTILS_EXPORTS
-#define LIBCUTILS_API __declspec(dllexport)
+#if defined(_WIN32) || defined(_WIN64) || defined(WIN32) || defined(WIN64)
+    #if defined(LIBCUTILS_EXPORTS)
+        #define LIBCUTILS_API __declspec(dllexport)
+    #else
+        #define LIBCUTILS_API __declspec(dllimport)
+    #endif
+#elif defined(__linux__) || defined(UNIX) || defined(__unix__) || defined(LINUX)
+    #if defined(LIBCUTILS_EXPORTS)
+        #define LIBCUTILS_API __attribute__((visibility("default")))
+    #else
+        #define LIBCUTILS_API
+    #endif
 #else
-#define LIBCUTILS_API __declspec(dllimport)
+    #define LIBCUTILS_API
+    #pragma WARNING: Unknown dynamic link import/export semantics.
 #endif
+
 
 #ifdef __cplusplus
 extern "C" {
