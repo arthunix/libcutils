@@ -4,7 +4,7 @@ void* safe_malloc(size_t n, unsigned long line)
 {
     void* ptr = malloc(n);
     if (!ptr) {
-        fprintf(stderr, "At [%s:%ul] unable to allocate (%ul bytes) of memory\n",
+        fprintf(stderr, "At [%s:%lu] unable to allocate (%lu bytes) of memory\n",
             __FILE__, line, (unsigned long)n);
         exit(EXIT_FAILURE);
     }
@@ -34,5 +34,9 @@ void print_array(
     void* curr_ptr = ((char*)data + ((p_numOfElements - 1) * sizeOfTheType));
     (printfun)(curr_ptr);
     fprintf(stdout, ">");
+#if defined(_WIN32) || defined(_WIN64) || defined(WIN32) || defined(WIN64)
     _flushall();
+#elif defined(__linux__) || defined(UNIX) || defined(__unix__) || defined(LINUX)
+    fflush(NULL);
+#endif
 }
