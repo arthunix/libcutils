@@ -23,19 +23,14 @@
     <ClCompile Include="main.c" />
     <ClCompile Include="rbtree.c" />
     <ClCompile Include="stack.c" />
+    <ClCompile Include="list.c" />
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="common.h" />
-    <ClInclude Include="list.c">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="list.h" />
-    <ClInclude Include="rbtree.h" />
-    <ClInclude Include="stack.h" />
-  </ItemGroup>
+	<ItemGroup>
+		<ClInclude Include="common.h" />
+		<ClInclude Include="list.h" />
+		<ClInclude Include="rbtree.h" />
+		<ClInclude Include="stack.h" />
+	</ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
