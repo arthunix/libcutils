@@ -55,8 +55,8 @@ extern "C" {
 #endif
 
 LIBCUTILS_API typedef struct listnode {
-    struct listnode* next;
-    struct listnode* prev;
+    struct listnode* pNext;
+    struct listnode* pPrev;
     void* data;
 }listnode, ListNode, LISTNODE, *listnodeptr, *ListNodePtr, *LISTNODEPTR;
 
@@ -65,22 +65,23 @@ LIBCUTILS_API typedef struct list
     int  (*cmpfun)(const void* a, const void* b);
     void (*destroydata)(void* a);
     void (*printdata)(const void* a);
-    struct listnode* head;
-    struct listnode* tail;
-    unsigned int size;
+    struct listnode* pHead;
+    struct listnode* pTail;
+    long long int size;
+    char isItSorted;
 }list, List, LIST;
 
 LIBCUTILS_API unsigned int list_size(const list* list_input);
 
 LIBCUTILS_API unsigned int list_empty(const list* list_input);
 
-LIBCUTILS_API list* list_contructor(
+LIBCUTILS_API list* list_create(
     int (*_cmpfun)(const void*, const void*),
     void (*_destroydata)(void*),
     void (*_printdata)(const void*)
 );
 
-LIBCUTILS_API void list_destructor(list* list_input);
+LIBCUTILS_API void list_destroy(list* list_input);
 
 LIBCUTILS_API void list_push_front(list* list_input, void* new_value);
 
@@ -89,6 +90,10 @@ LIBCUTILS_API void list_pop_front(list* list_input);
 LIBCUTILS_API void list_push_back(list* list_input, void* new_value);
 
 LIBCUTILS_API void list_pop_back(list* list_input);
+
+LIBCUTILS_API void list_insert_sorted(list* list_input);
+
+LIBCUTILS_API void list_sort(list* list_input, void(*_sort)(const void*));
 
 LIBCUTILS_API void list_erase(list* list_input, unsigned int position);
 
