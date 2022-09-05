@@ -47,6 +47,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #pragma WARNING: Unknown dynamic link import/export semantics.
 #endif
 
+#include "list.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -87,6 +88,8 @@ LIBCUTILS_API void rbtree_print_preorder(const rbtree* tree);
 LIBCUTILS_API void rbtree_print_postorder(const rbtree* tree);
 
 LIBCUTILS_API rbnode* rbtree_search(const rbtree* tree, const void* data);
+
+LIBCUTILS_API list* rbtree_search_array(const rbtree* tree, const void* data);
 
 LIBCUTILS_API rbnode* rbtree_predecessor(const rbtree* tree, const rbnode*);
 

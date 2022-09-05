@@ -28,6 +28,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "rbtree.h"
 #include "common.h"
+#include "list.h"
 
 #include <stdlib.h>
 
@@ -382,6 +383,29 @@ rbnode* rbtree_search(const rbtree* tree, const void* data) {
         cmp = tree->cmpfun(x->data, data);
     }
     return x;
+}
+
+void _rbtree_search_array(const rbtree* tree, const rbnode* x, const void* data, list* found) {
+
+    if (x != tree->nil)
+    {
+        if(tree->cmpfun(x->data, data) == 0) list_push_back(found, x->data);
+        _rbtree_search_array(tree, x->left, data, found);
+        _rbtree_search_array(tree, x->right, data, found);
+    }
+}
+
+/// <summary>
+/// Searches the red black tree, returns the data if key is found or NULL otherwise.
+/// </summary>
+/// <param name="tree"></param>
+/// <param name="data"></param>
+/// <returns>NULL on failure or the pointer to the node otherwise</returns>
+list* rbtree_search_array(const rbtree* tree, const void* data) {
+    list* found_list = list_create(tree->cmpfun, tree->destroydata, tree->printdata);
+    _rbtree_search_array(tree, tree->root->left, data, found_list);
+
+    return found_list;
 }
 
 /// <summary>
