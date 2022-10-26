@@ -32,6 +32,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 
 #if defined(_WIN32) || defined(_WIN64) || defined(WIN32) || defined(WIN64)
 #if defined(LIBCUTILS_EXPORTS)
@@ -107,15 +108,13 @@ extern "C" {
         struct RbNode* nil;
     } RbTree, RBTREE, rbtree;
 
-    LIBCUTILS_API typedef struct stacknode
-    {
+    LIBCUTILS_API typedef struct stacknode {
         struct stacknode* up;
         struct stacknode* down;
         void* data;
     } stacknode, StackNode, STACKNODE, * stacknodeptr, * StackNodePtr, * STACKNODEPTR;
 
-    LIBCUTILS_API typedef struct Stack
-    {
+    LIBCUTILS_API typedef struct Stack {
         int  (*cmpfun)(const void* a, const void* b);
         void (*destroydata)(void* a);
         void (*printdata)(const void* a);
@@ -135,6 +134,13 @@ extern "C" {
     LIBCUTILS_API void* safe_malloc(size_t n, unsigned long line);
 
     #define malloc_v(n) safe_malloc(n, __LINE__)
+
+    #define log_time_taken(function, time_taken) {  \
+        clock_t t = clock();                        \
+        function;                                   \
+        t = clock() - t;                            \
+        time_taken = ((double)t)/CLOCKS_PER_SEC;    \
+    }
 
     LIBCUTILS_API void print_array(
         void* data,
