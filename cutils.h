@@ -135,11 +135,11 @@ extern "C" {
 
     #define malloc_v(n) safe_malloc(n, __LINE__)
 
-    #define log_time_taken(function, time_taken) {  \
-        clock_t t = clock();                        \
-        function;                                   \
-        t = clock() - t;                            \
-        time_taken = ((double)t)/CLOCKS_PER_SEC;    \
+    #define log_time_taken(clock_var, function, time_taken) {       \
+        clock_var = clock();                                        \
+        function;                                                   \
+        clock_var = clock() - clock_var;                            \
+        time_taken = ((double)t)/CLOCKS_PER_SEC;                    \
     }
 
     LIBCUTILS_API void print_array(
