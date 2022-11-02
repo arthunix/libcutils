@@ -135,12 +135,31 @@ extern "C" {
 
     #define malloc_v(n) safe_malloc(n, __LINE__)
 
-    #define log_time_taken(clock_var, function, time_taken) {       \
-        clock_var = clock();                                        \
-        function;                                                   \
-        clock_var = clock() - clock_var;                            \
-        time_taken = ((double)t)/CLOCKS_PER_SEC;                    \
-    }
+   /*
+   please declare the following variables and pass them as parameters:
+   double how_much_time_taken; clock_t how_much_clock_taken;
+   */
+   #define log_cpu_time_taken(clock_var, function, time_taken) {                                      \
+       clock_var = clock();                                                                            \
+       function;                                                                                       \
+       clock_var = clock() - clock_var;                                                                \
+       time_taken = ((double)clock_var)/CLOCKS_PER_SEC;                                                \
+       fprintf(stderr, "CPU time taken: %.5lf in %s at line %i\n", time_taken, #function, __LINE__);   \
+   }
+
+   /*
+   please declare the following variables and pass them as parameters:
+   double how_much_time_taken; struct timeval time_val_begin, time_val_end; long wall_seconds, wall_useconds;
+   */
+   #define log_wall_time_taken(wall_var_sec, wall_var_usec, wall_time_var_beg, wall_time_var_end, function, time_taken) {  \
+       gettimeofday(&wall_time_var_beg, 0);                                                                                \
+       function;                                                                                                           \
+       gettimeofday(&wall_time_var_end, 0);                                                                                \
+       wall_var_sec = wall_time_var_end.tv_sec - wall_time_var_beg.tv_sec;                                                 \
+       wall_var_usec = wall_time_var_end.tv_usec - wall_time_var_beg.tv_usec;                                              \
+       time_taken = wall_var_sec + wall_var_usec*1e-10;                                                                    \
+       fprintf(stderr, "Wall time taken: %.5lf sec in %s at line %i\n", time_taken, #function, __LINE__);                  \
+   }
 
     LIBCUTILS_API void print_array(
         void* data,
