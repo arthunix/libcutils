@@ -138,17 +138,19 @@ extern "C" {
     LIBCUTILS_API void double_linked_list_destroy(doublelinkedlist* double_linked_list);
     LIBCUTILS_API listnode* double_linked_list_insert_at_index(doublelinkedlist* double_linked_list, const void* value, unsigned int position);
     LIBCUTILS_API void double_linked_list_pop_at_index(doublelinkedlist* double_linked_list, unsigned int position);
+    LIBCUTILS_API void double_linked_list_pop(doublelinkedlist* double_linked_list, listnode* node_adress);
     LIBCUTILS_API listnode* double_linked_list_insert_back(doublelinkedlist* double_linked_list, const void* value);
     LIBCUTILS_API listnode* double_linked_list_insert_front(doublelinkedlist* double_linked_list, const void* value);
     LIBCUTILS_API void double_linked_list_pop_back(doublelinkedlist* double_linked_list);
     LIBCUTILS_API void double_linked_list_pop_front(doublelinkedlist* double_linked_list);
+    LIBCUTILS_API listnode* double_linked_list_search(doublelinkedlist* double_linked_list, const void* value);
     LIBCUTILS_API listnode* double_linked_list_insert_back_sorted(doublelinkedlist* double_linked_list, const void* value);
     LIBCUTILS_API listnode* double_linked_list_insert_front_sorted(doublelinkedlist* double_linked_list, const void* value);
     LIBCUTILS_API void double_linked_list_sort(doublelinkedlist* double_linked_list);
     LIBCUTILS_API listnode double_linked_list_front(doublelinkedlist* double_linked_list);
     LIBCUTILS_API listnode double_linked_list_back(doublelinkedlist* double_linked_list);
     LIBCUTILS_API listnode double_linked_list_retrieve(doublelinkedlist* double_linked_list, unsigned int position);
-    LIBCUTILS_API void double_linked_list_for_each(void (*operation)(listnode a));
+    LIBCUTILS_API void double_linked_list_for_each(doublelinkedlist* double_linked_list, void (*operation)(listnode a));
 
     LIBCUTILS_API circularlist* circular_linked_list_create(int (*_cmpfun)(const void*, const void*), void (*_destroydata)(void*), void (*_printdata)(const void*));
     LIBCUTILS_API void circular_list_destroy(circularlist* circular_list);
