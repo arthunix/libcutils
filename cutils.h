@@ -37,6 +37,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #if defined(_WIN32) || defined(_WIN64) || defined(WIN32) || defined(WIN64)
 
 #include <sysinfoapi.h>
+#include <BaseTsd.h>
+#include <WinDef.h>
+#include <WinNT.h>
 
 #if defined(LIBCUTILS_EXPORTS)
 #define LIBCUTILS_API __declspec(dllexport)
@@ -70,6 +73,13 @@ extern "C" {
         void* data;
     }listnode, ListNode, LISTNODE, * listnodeptr, * ListNodePtr, * LISTNODEPTR;
 
+    LIBCUTILS_API typedef struct listnode queuenode;
+    LIBCUTILS_API typedef struct listnode QueueNode;
+    LIBCUTILS_API typedef struct listnode QUEUENODE;
+    LIBCUTILS_API typedef struct listnodeptr queuenodeptr;
+    LIBCUTILS_API typedef struct listnodeptr QueueNodePtr;
+    LIBCUTILS_API typedef struct listnodeptr QUEUENODEPTR;
+
     LIBCUTILS_API typedef struct listproto {
         int  (*cmpfun)(const void* a, const void* b);
         void (*destroydata)(void* a);
@@ -84,21 +94,15 @@ extern "C" {
         char isItSorted;
     }doublelinkedlist, DoubleLinkedList, DOUBLELINKEDLIST;
 
-    LIBCUTILS_API typedef struct circularlist {
-        listproto protofun;
-        struct listnode* pHead;
-        struct listnode* pTail;
-        long long int size;
-        char isItSorted;
-    } circularlist, CircularList, CIRCULARLIST, ringbuffer, RingBuffer, RINGBUFFER;
-
-    LIBCUTILS_API typedef struct queue {
-        listproto protofun;
-        struct listnode* pHead;
-        struct listnode* pTail;
-        long long int size;
-        char isItSorted;
-    } queue, Queue, QUEUE;
+    LIBCUTILS_API typedef struct doublelinkedlist circularlist;
+    LIBCUTILS_API typedef struct doublelinkedlist CircularList;
+    LIBCUTILS_API typedef struct doublelinkedlist CIRCULARLIST;
+    LIBCUTILS_API typedef struct doublelinkedlist ringbuffer;
+    LIBCUTILS_API typedef struct doublelinkedlist RingBuffer;
+    LIBCUTILS_API typedef struct doublelinkedlist RINGBUFFER;
+    LIBCUTILS_API typedef struct doublelinkedlist queue;
+    LIBCUTILS_API typedef struct doublelinkedlist Queue;
+    LIBCUTILS_API typedef struct doublelinkedlist QUEUE;
 
     LIBCUTILS_API typedef struct RbNode {
         void* data;
@@ -114,7 +118,7 @@ extern "C" {
         void (*printdata)(const void* a);
         struct RbNode* root;
         struct RbNode* nil;
-    } RbTree, RBTREE, rbtree;
+    } Rbrb_tree, RBrb_tree, rbtree;
 
     LIBCUTILS_API typedef struct stacknode {
         struct stacknode* up;
@@ -131,12 +135,15 @@ extern "C" {
     }stack, Stack, STACK;
 
     LIBCUTILS_API doublelinkedlist* double_linked_list_create(int (*_cmpfun)(const void*, const void*), void (*_destroydata)(void*), void (*_printdata)(const void*));
-    LIBCUTILS_API void double_linked_list_insert(doublelinkedlist* double_linked_list, const void* value);
-    LIBCUTILS_API void double_linked_list_insert_at_index(doublelinkedlist* double_linked_list, const void* value, unsigned int position);
-    LIBCUTILS_API void double_linked_list_insert_back(doublelinkedlist* double_linked_list, const void* value);
-    LIBCUTILS_API void double_linked_list_insert_front(doublelinkedlist* double_linked_list, const void* value);
-    LIBCUTILS_API void double_linked_list_insert_back_sorted(doublelinkedlist* double_linked_list, const void* value);
-    LIBCUTILS_API void double_linked_list_insert_front_sorted(doublelinkedlist* double_linked_list, const void* value);
+    LIBCUTILS_API void double_linked_list_destroy(doublelinkedlist* double_linked_list);
+    LIBCUTILS_API listnode* double_linked_list_insert_at_index(doublelinkedlist* double_linked_list, const void* value, unsigned int position);
+    LIBCUTILS_API void double_linked_list_pop_at_index(doublelinkedlist* double_linked_list, unsigned int position);
+    LIBCUTILS_API listnode* double_linked_list_insert_back(doublelinkedlist* double_linked_list, const void* value);
+    LIBCUTILS_API listnode* double_linked_list_insert_front(doublelinkedlist* double_linked_list, const void* value);
+    LIBCUTILS_API void double_linked_list_pop_back(doublelinkedlist* double_linked_list);
+    LIBCUTILS_API void double_linked_list_pop_front(doublelinkedlist* double_linked_list);
+    LIBCUTILS_API listnode* double_linked_list_insert_back_sorted(doublelinkedlist* double_linked_list, const void* value);
+    LIBCUTILS_API listnode* double_linked_list_insert_front_sorted(doublelinkedlist* double_linked_list, const void* value);
     LIBCUTILS_API void double_linked_list_sort(doublelinkedlist* double_linked_list);
     LIBCUTILS_API listnode double_linked_list_front(doublelinkedlist* double_linked_list);
     LIBCUTILS_API listnode double_linked_list_back(doublelinkedlist* double_linked_list);
@@ -144,9 +151,47 @@ extern "C" {
     LIBCUTILS_API void double_linked_list_for_each(void (*operation)(listnode a));
 
     LIBCUTILS_API circularlist* circular_linked_list_create(int (*_cmpfun)(const void*, const void*), void (*_destroydata)(void*), void (*_printdata)(const void*));
+    LIBCUTILS_API void circular_list_destroy(circularlist* circular_list);
+    LIBCUTILS_API listnode* circular_list_insert_at_index(circularlist* circular_list, const void* value, unsigned int position);
+    LIBCUTILS_API void circular_list_pop_at_index(circularlist* circular_list, unsigned int position);
+    LIBCUTILS_API listnode* circular_list_insert_back(circularlist* circular_list, const void* value);
+    LIBCUTILS_API listnode* circular_list_insert_front(circularlist* circular_list, const void* value);
+    LIBCUTILS_API void circular_list_pop_back(circularlist* circular_list);
+    LIBCUTILS_API void circular_list_pop_front(circularlist* circular_list);
+    LIBCUTILS_API listnode* circular_list_insert_back_sorted(circularlist* circular_list, const void* value);
+    LIBCUTILS_API listnode* circular_list_insert_front_sorted(circularlist* circular_list, const void* value);
+    LIBCUTILS_API void circular_list_sort(circularlist* circular_list);
+    LIBCUTILS_API listnode circular_list_front(circularlist* circular_list);
+    LIBCUTILS_API listnode circular_list_back(circularlist* circular_list);
+    LIBCUTILS_API listnode circular_list_retrieve(circularlist* circular_list, unsigned int position);
+    LIBCUTILS_API void circular_list_for_each(void (*operation)(listnode a));
 
     LIBCUTILS_API queue* queue_create(int (*_cmpfun)(const void*, const void*), void (*_destroydata)(void*), void (*_printdata)(const void*));
+    LIBCUTILS_API void queue_destroy(queue* double_linked_list);
+    LIBCUTILS_API void queue_push(queue* double_linked_list, const void* value);
+    LIBCUTILS_API queuenode queue_pop(queue* double_linked_list);
+    LIBCUTILS_API queuenode queue_retrieve_first(queue* double_linked_list);
+    LIBCUTILS_API queuenode queue_retrieve_last(queue* double_linked_list);
+    LIBCUTILS_API void queue_size(queue* double_linked_list);
 
+    LIBCUTILS_API stack* stack_create(int (*_cmpfun)(const void*, const void*), void (*_destroydata)(void*), void (*_printdata)(const void*));
+    LIBCUTILS_API void stack_destroy(stack* double_linked_list);
+    LIBCUTILS_API void stack_push(stack* double_linked_list, const void* value);
+    LIBCUTILS_API stacknode stack_pop(stack* double_linked_list);
+    LIBCUTILS_API stacknode stack_top(stack* double_linked_list);
+    LIBCUTILS_API void stack_size(stack* double_linked_list);
+
+    LIBCUTILS_API rbtree* rbtree_create(int (*cmpfun)(const void*, const void*),void (*destroydata)(void*),void (*printdata)(const void*));
+    LIBCUTILS_API void rbtree_destroy(rbtree* rb_tree);
+    LIBCUTILS_API rbnode* rbtree_insert(rbtree* rb_tree, void*);
+    LIBCUTILS_API void rbtree_delete(rbtree* rb_tree, rbnode* rb_node_to_remove);
+    LIBCUTILS_API void rbtree_print_inorder(const rbtree* rb_tree);
+    LIBCUTILS_API void rbtree_print_preorder(const rbtree* rb_tree);
+    LIBCUTILS_API void rbtree_print_postorder(const rbtree* rb_tree);
+    LIBCUTILS_API rbnode* rbtree_search(const rbtree* rb_tree, const void* data);
+    LIBCUTILS_API doublelinkedlist* rbtree_search_array(const rbtree* rb_tree, const void* data);
+    LIBCUTILS_API rbnode* rbtree_predecessor(const rbtree* rb_tree, const rbnode*);
+    LIBCUTILS_API rbnode* rbtree_successor(const rbtree* rb_tree, const rbnode*);
 
     LIBCUTILS_API void* safe_malloc(size_t n, unsigned long line);
 
