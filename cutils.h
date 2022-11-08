@@ -130,14 +130,23 @@ extern "C" {
         unsigned int size;
     }stack, Stack, STACK;
 
-    LIBCUTILS_API unsigned int stack_size(const stack* stack_input);
-    LIBCUTILS_API int stack_empty(const stack* stack_input);
-    LIBCUTILS_API stack* stack_create(int (*_cmpfun)(const void*, const void*), void (*_destroydata)(void*), void (*_printdata)(const void*));
-    LIBCUTILS_API void stack_destroy(stack* stack_input);
-    LIBCUTILS_API stacknode* stack_top(stack* stack_input);
-    LIBCUTILS_API void stack_push(stack* stack_input, void* new_inserted_data);
-    LIBCUTILS_API void stack_pop(stack* stack_input);
-    LIBCUTILS_API void stack_print(const stack* list_input);
+    LIBCUTILS_API doublelinkedlist* double_linked_list_create(int (*_cmpfun)(const void*, const void*), void (*_destroydata)(void*), void (*_printdata)(const void*));
+    LIBCUTILS_API void double_linked_list_insert(doublelinkedlist* double_linked_list, const void* value);
+    LIBCUTILS_API void double_linked_list_insert_at_index(doublelinkedlist* double_linked_list, const void* value, unsigned int position);
+    LIBCUTILS_API void double_linked_list_insert_back(doublelinkedlist* double_linked_list, const void* value);
+    LIBCUTILS_API void double_linked_list_insert_front(doublelinkedlist* double_linked_list, const void* value);
+    LIBCUTILS_API void double_linked_list_insert_back_sorted(doublelinkedlist* double_linked_list, const void* value);
+    LIBCUTILS_API void double_linked_list_insert_front_sorted(doublelinkedlist* double_linked_list, const void* value);
+    LIBCUTILS_API void double_linked_list_sort(doublelinkedlist* double_linked_list);
+    LIBCUTILS_API listnode double_linked_list_front(doublelinkedlist* double_linked_list);
+    LIBCUTILS_API listnode double_linked_list_back(doublelinkedlist* double_linked_list);
+    LIBCUTILS_API listnode double_linked_list_retrieve(doublelinkedlist* double_linked_list, unsigned int position);
+    LIBCUTILS_API void double_linked_list_for_each(void (*operation)(listnode a));
+
+    LIBCUTILS_API circularlist* circular_linked_list_create(int (*_cmpfun)(const void*, const void*), void (*_destroydata)(void*), void (*_printdata)(const void*));
+
+    LIBCUTILS_API queue* queue_create(int (*_cmpfun)(const void*, const void*), void (*_destroydata)(void*), void (*_printdata)(const void*));
+
 
     LIBCUTILS_API void* safe_malloc(size_t n, unsigned long line);
 
