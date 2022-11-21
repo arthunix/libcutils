@@ -31,8 +31,9 @@ void int_destroy(void* a) {
     free((int*)a);
 }
 
-int* int_allocate(void* a) {
-    free((int*)a);
+int* int_allocate(void* *a) {
+    a = (int*)malloc_v(sizeof(int*));
+    return a;
 }
 
 int int_cmp(const void* a, const void* b) {
@@ -65,7 +66,7 @@ queue*              my_queue;
 stack*              my_stack;
 
 my_doublelinkedlist = double_linked_list_create(my_type_compare_helper, my_type_destroy_helper, my_type_allocate_helper, my_type_print_helper);
-my_circularlist   = circular_linked_list_create(my_type_compare_helper, my_type_destroy_helper, my_type_allocate_helper, my_type_print_helper);
+my_circularlist     = circular_linked_list_create(my_type_compare_helper, my_type_destroy_helper, my_type_allocate_helper, my_type_print_helper);
 my_queue            = queue_create(my_type_compare_helper, my_type_destroy_helper, my_type_allocate_helper, my_type_print_helper);
 my_stack            = stack_create(my_type_compare_helper, my_type_destroy_helper, my_type_allocate_helper, my_type_print_helper);
 ```
